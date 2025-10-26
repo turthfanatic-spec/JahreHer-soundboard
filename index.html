@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soundboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .soundboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      width: 100%;
+      max-width: 1000px;
+    }
+    button {
+      padding: 15px;
+      font-size: 14px;
+      border: none;
+      border-radius: 8px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      text-align: center;
+      white-space: normal;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>JahreHer Soundboard</h1>
+  <div class="soundboard">
+    <button onclick="toggleSound('Alle so Grottenschlecht.mp3')">Alle so Grottenschlecht</button>
+    <button onclick="toggleSound('BEEFMASTER.mp3')">BEEFMASTER</button>
+    <button onclick="toggleSound('BRISTEBAAAAAAAAAACK.mp3')">BRISTEBAAAAAAAAAACK</button>
+    <button onclick="toggleSound('FICK DICH.mp3')">FICK DICH</button>
+    <button onclick="toggleSound('Günther.mp3')">Günther</button>
+    <button onclick="toggleSound('i make the kills and you shut up.mp3')">i make the kills</button>
+    <button onclick="toggleSound('JUGGER du DOG.mp3')">JUGGER du DOG</button>
+    <button onclick="toggleSound('Lina Buyback.mp3')">Lina Buyback</button>
+    <button onclick="toggleSound('Lion wake up!.mp3')">Lion wake up!</button>
+    <button onclick="toggleSound('Mal wissen WO IST MEIN TEAM.mp3')">WO IST MEIN TEAM</button>
+    <button onclick="toggleSound('MEDUSA your SHIELD.mp3')">MEDUSA your SHIELD</button>
+    <button onclick="toggleSound('Nature was macht der nature.mp3')">Nature was macht der nature</button>
+    <button onclick="toggleSound('Necro alone not alone.mp3')">Necro alone not alone</button>
+    <button onclick="toggleSound('Nightstalker has NOTHING.mp3')">Nightstalker has NOTHING</button>
+    <button onclick="toggleSound('ORC.mp3')">ORC</button>
+    <button onclick="toggleSound('Pudge background.mp3')">Pudge background</button>
+    <button onclick="toggleSound('Riki best item.mp3')">Riki best item</button>
+    <button onclick="toggleSound('SANDKING.mp3')">SANDKING</button>
+    <button onclick="toggleSound('Slark.mp3')">Slark</button>
+    <button onclick="toggleSound('SNIPEEEER.mp3')">SNIPEEEER</button>
+    <button onclick="toggleSound('SPECTRE.mp3')">SPECTRE</button>
+    <button onclick="toggleSound('Underlord mute the hitler.mp3')">Underlord mute the hitler</button>
+    <button onclick="toggleSound('VENGUL.mp3')">VENGUL</button>
+    <button onclick="toggleSound('VIPER.mp3')">VIPER</button>
+    <button onclick="toggleSound('Warlock where ulti.mp3')">Warlock where ulti</button>
+    <button onclick="toggleSound('WAVE KING.. oh illusion.mp3')">WAVE KING.. oh illusion</button>
+    <button onclick="toggleSound('WD I CHECK YOU AND LOST.mp3')">WD I CHECK YOU AND LOST</button>
+    <button onclick="toggleSound('WD SEE THE WARDS!.mp3')">WD SEE THE WARDS!</button>
+    <button onclick="toggleSound('WIEDER DER BAUM. HALT DIE FRESSE.mp3')">WIEDER DER BAUM</button>
+    <button onclick="toggleSound('You fucking idiot alda.mp3')">You fucking idiot alda</button>
+  </div>
+
+  <script>
+    let currentAudio = null;
+    let currentFile = null;
+
+    function toggleSound(filename) {
+      // Wenn derselbe Sound läuft -> pausieren und zurücksetzen
+      if (currentAudio && currentFile === filename) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentAudio = null;
+        currentFile = null;
+        return;
+      }
+
+      // Anderen Sound stoppen
+      if (currentAudio) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
+
+      // Neuen Sound starten
+      currentAudio = new Audio(filename);
+      currentAudio.play();
+      currentFile = filename;
+    }
+  </script>
+</body>
+</html>
