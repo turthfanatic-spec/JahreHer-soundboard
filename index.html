@@ -1,134 +1,140 @@
-!DOCTYPE html
-html lang=de
-head
-  meta charset=UTF-8
-  meta name=viewport content=width=device-width, initial-scale=1.0
-  titleSoundboardtitle
-  style
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soundboard</title>
+
+  <style>
     body {
-      font-family Arial, sans-serif;
-      display flex;
-      flex-direction column;
-      align-items center;
-      padding 20px;
-      background-color #f4f4f4;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      background-color: #f4f4f4;
     }
+
     h1 {
-      margin-bottom 20px;
+      margin-bottom: 20px;
     }
+
     .soundboard {
-      display grid;
-      grid-template-columns repeat(auto-fit, minmax(180px, 1fr));
-      gap 15px;
-      width 100%;
-      max-width 1100px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+      width: 100%;
+      max-width: 1100px;
     }
+
     button {
-      padding 15px;
-      font-size 14px;
-      border none;
-      border-radius 8px;
-      background-color #007bff;
-      color white;
-      cursor pointer;
-      white-space normal;
-      word-break break-word;
-      transition background-color 0.2s;
+      padding: 15px;
+      font-size: 14px;
+      border: none;
+      border-radius: 8px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      white-space: normal;
+      word-break: break-word;
+      transition: background-color 0.2s;
     }
-    buttonhover {
-      background-color #0056b3;
+
+    button:hover {
+      background-color: #0056b3;
     }
-  style
-head
-body
-  h1JahreHer Soundboardh1
+  </style>
 
-  div class=soundboard id=soundboarddiv
+</head>
+<body>
 
-  script
+  <h1>JahreHer Soundboard</h1>
+
+  <div class="soundboard" id="soundboard"></div>
+
+  <script>
     let currentAudio = null;
     let currentFile = null;
 
-     🔥 ALLE DATEIEN MANUELL EINTRAGEN (alte + neue)
+    // ALLE MP3s – alte + neue
     const soundFiles = [
-      Alle so Grottenschlecht.mp3,
-      BEEFMASTER.mp3,
-      BRISTEBAAAAAAAAAACK.mp3,
-      FICK DICH.mp3,
-      Günther.mp3,
-      i make the kills and you shut up.mp3,
-      JUGGER du DOG.mp3,
-      Lina Buyback.mp3,
-      Lion wake up!.mp3,
-      Mal wissen WO IST MEIN TEAM.mp3,
-      MEDUSA your SHIELD.mp3,
-      Nature was macht der nature.mp3,
-      Necro alone not alone.mp3,
-      Nightstalker has NOTHING.mp3,
-      ORC.mp3,
-      Pudge background.mp3,
-      Riki best item.mp3,
-      SANDKING.mp3,
-      Slark.mp3,
-      SNIPEEEER.mp3,
-      SPECTRE.mp3,
-      Underlord mute the hitler.mp3,
-      VENGUL.mp3,
-      VIPER.mp3,
-      Warlock where ulti.mp3,
-      WAVE KING.. oh illusion.mp3,
-      WD I CHECK YOU AND LOST.mp3,
-      WD SEE THE WARDS!.mp3,
-      WIEDER DER BAUM. HALT DIE FRESSE.mp3,
-      You fucking idiot alda.mp3,
-      Rubick.mp3,
-      SPIRITBREAKER.mp3,
-      DARK SEER.mp3,
-      Veni vadi vici.mp3,
-      Sniper du verdammter Loser.mp3,
-      DK feedet.mp3,
-      Dawnbreaker.mp3,
-      TECHIES.mp3,
+      "Alle so Grottenschlecht.mp3",
+      "BEEFMASTER.mp3",
+      "BRISTEBAAAAAAAAAACK.mp3",
+      "FICK DICH.mp3",
+      "Günther.mp3",
+      "i make the kills and you shut up.mp3",
+      "JUGGER du DOG.mp3",
+      "Lina Buyback.mp3",
+      "Lion wake up!.mp3",
+      "Mal wissen WO IST MEIN TEAM.mp3",
+      "MEDUSA your SHIELD.mp3",
+      "Nature was macht der nature.mp3",
+      "Necro alone not alone.mp3",
+      "Nightstalker has NOTHING.mp3",
+      "ORC.mp3",
+      "Pudge background.mp3",
+      "Riki best item.mp3",
+      "SANDKING.mp3",
+      "Slark.mp3",
+      "SNIPEEEER.mp3",
+      "SPECTRE.mp3",
+      "Underlord mute the hitler.mp3",
+      "VENGUL.mp3",
+      "VIPER.mp3",
+      "Warlock where ulti.mp3",
+      "WAVE KING.. oh illusion.mp3",
+      "WD I CHECK YOU AND LOST.mp3",
+      "WD SEE THE WARDS!.mp3",
+      "WIEDER DER BAUM. HALT DIE FRESSE.mp3",
+      "You fucking idiot alda.mp3",
+      "Rubick.mp3",
+      "SPIRITBREAKER.mp3",
+      "DARK SEER.mp3",
+      "Veni vadi vici.mp3",
+      "Sniper du verdammter Loser.mp3",
+      "DK feedet.mp3",
+      "Dawnbreaker.mp3",
+      "TECHIES.mp3",
 
-       🔥 HIER ALLE NEUEN EINFÜGEN
-      Dafür ist der Muteknopf da.mp3,
-      Blutdruck bei 200.mp3,
-      Clinkz.mp3,
-      TINY TINY TINY!.mp3,
-      Stream sniper TUSK.mp3,
-      RANG IST A UND O.mp3,
-      AXE.mp3,
-      GUCKT EUCH DEN SNIPER AN!!!.mp3,
-      Drow Ranger COME.mp3,
-      spec man.mp3,
-      Lina macht NIX!.mp3,
-      Slark hallooooo.mp3,
-      vengul SCHEISS IDIOT.mp3,
-      orgel is a bot.mp3,
-      Chen Sabotage.mp3,
-      Legend feedet rein.mp3,
-      Sniper + Silencer .mp3,
-      SAAAAAANDKING.mp3,
-      Sniper Vol.3.mp3,
-      Warum ich so Schreie_.mp3,
-      Dark Seer stupid.mp3,
-      Beffrider.mp3,
-      VIPER, VIPER! (neues SNIPA).mp3,
-      Arc warden behindert das Spiel.mp3,
-      CRYSTAL MAIIIDEN ohh.mp3,
-      Sniper gg for you.mp3,
-      WARLOCK NICE ITEMS.mp3,
-      20 in a row.mp3,
-      SHIL SHIL !.mp3
+      "Dafür ist der Muteknopf da.mp3",
+      "Blutdruck bei 200.mp3",
+      "Clinkz.mp3",
+      "TINY TINY TINY!.mp3",
+      "Stream sniper TUSK.mp3",
+      "RANG IST A UND O.mp3",
+      "AXE.mp3",
+      "GUCKT EUCH DEN SNIPER AN!!!.mp3",
+      "Drow Ranger COME.mp3",
+      "spec man.mp3",
+      "Lina macht NIX!.mp3",
+      "Slark hallooooo.mp3",
+      "vengul SCHEISS IDIOT.mp3",
+      "orgel is a bot.mp3",
+      "Chen Sabotage.mp3",
+      "Legend feedet rein.mp3",
+      "Sniper + Silencer .mp3",
+      "SAAAAAANDKING.mp3",
+      "Sniper Vol.3.mp3",
+      "Warum ich so Schreie_.mp3",
+      "Dark Seer stupid.mp3",
+      "Beffrider.mp3",
+      "VIPER, VIPER! (neues SNIPA).mp3",
+      "Arc warden behindert das Spiel.mp3",
+      "CRYSTAL MAIIIDEN ohh.mp3",
+      "Sniper gg for you.mp3",
+      "WARLOCK NICE ITEMS.mp3",
+      "20 in a row.mp3",
+      "SHIL SHIL !.mp3"
     ];
 
-     Buttons automatisch erstellen
-    const board = document.getElementById(soundboard);
+    // Buttons erzeugen
+    const board = document.getElementById("soundboard");
 
-    soundFiles.forEach(name = {
-      const btn = document.createElement(button);
-      btn.textContent = name.replace(.mp3, );
-      btn.onclick = () = toggleSound(name);
+    soundFiles.forEach(name => {
+      const btn = document.createElement("button");
+      btn.textContent = name.replace(".mp3", "");
+      btn.onclick = () => toggleSound(name);
       board.appendChild(btn);
     });
 
@@ -148,7 +154,8 @@ body
       currentAudio.play();
       currentFile = filename;
     }
-  script
+  </script>
 
-body
-html
+</body>
+</html>
+
